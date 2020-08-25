@@ -62,7 +62,7 @@
                                     </a>
 
                                     @can('manage-users')
-                                        <a href="{{ route('admin.users.index') }}" class="dropdown-item">User Management</a>                                        
+                                        <a href="{{ route('panel.users.index') }}" class="dropdown-item">User Management</a>                                        
                                     @endcan
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
