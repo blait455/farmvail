@@ -19,8 +19,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::view('/home', 'panel.dashboard.index')->name('home');
-
-Route::namespace('Panel')->prefix('panel')->name('panel.')->middleware('can:manage-users')->group(function() {
-    Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+Route::namespace('Panel')->prefix('home')->group(function() {
+    Route::view('/', 'panel.dashboard.index')->name('home');
+    Route::name('panel.')->middleware('can:manage-users')->group(function() {
+        Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
+        Route::resource('/roles', 'RolesController', ['except' => ['show', 'create']]);
+    });
 });

@@ -20,13 +20,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Admin Users</a>
-                    </li>
-                    <li>
                         <a class="treeview-item" href="{{ route('panel.users.index') }}"><i class="icon fa fa-circle-o"></i>Users</a>
                     </li>
                     <li>
-                        <a class="treeview-item" href="#" target="_blank" rel="noopener noreferrer"><i class="icon fa fa-circle-o"></i>Roles</a>
+                        <a class="treeview-item" href="{{ route('panel.roles.index') }}" target="_blank" rel="noopener noreferrer"><i class="icon fa fa-circle-o"></i>Roles</a>
                     </li>
                     <li>
                         <a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Permissions</a>
