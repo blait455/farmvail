@@ -12,6 +12,13 @@
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.categories.index' ? 'active' : '' }}"
+                href="{{ route('panel.categories.index') }}">
+                <i class="app-menu__icon fa fa-tags"></i>
+                <span class="app-menu__label">Categories</span>
+            </a>
+        </li>
         @can('manage-users')
             <li class="treeview">
                 <a class="app-menu__item {{ Route::currentRouteName() == 'panel.users.index' ? 'active' : '' || Route::currentRouteName() == 'panel.roles.index' ? 'active' : '' }}" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i>

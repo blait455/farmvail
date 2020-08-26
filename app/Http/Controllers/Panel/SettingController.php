@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\UploadedFile;
+use App\Traits\UploadAble;
 use App\Setting;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    use UploadAble;
+
     public function index(){
         $settings = Setting::all();
         return view('panel.settings.index', compact('settings'));
@@ -39,6 +43,6 @@ class SettingController extends Controller
                 Setting::set($key, $value);
             }
         }
-        return $this->responseRedirectBack();
+        return redirect()->back();
     }
 }

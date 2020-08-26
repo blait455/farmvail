@@ -20,10 +20,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::namespace('Panel')->prefix('home')->group(function() {
-    Route::view('/', 'panel.dashboard.index')->name('home');
-    Route::name('panel.')->middleware('can:manage-users')->group(function() {
-        Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
-        Route::resource('/roles', 'RolesController', ['except' => ['show', 'create']]);
+    Route::view('/', 'panel.dashboard.index')->name('home')->middleware('auth');
+    Route::name('panel.')->group(function() {
+        Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:manage-users');
+        Route::resource('/roles', 'RolesController', ['except' => ['show', 'create']])->middleware('can:manage-users');
+        // Route::resource('/categories', 'CategoryController');
+        Route::group(['prefix'  =>   'categories'], function() {
+
+            Route::get('/', 'CategoryController@index')->name('categories.index');
+            Route::get('/create', 'CategoryController@create')->name('categories.create');
+            Route::post('/store', 'CategoryController@store')->name('categories.store');
+            Route::get('/{id}/edit', 'CategoryController@edit')->name('categories.edit');
+            Route::post('/update/{id}', 'CategoryController@update')->name('categories.update');
+            Route::get('/{id}/delete', 'CategoryController@delete')->name('categories.delete');
+
+        });
     });
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::post('/settings', 'SettingController@update')->name('settings.update');
