@@ -8,22 +8,22 @@
     </div>
     <ul class="app-menu">
         <li>
-            <a class="app-menu__item active" href="{{ route('home') }}"><i class="app-menu__icon fa fa-dashboard"></i>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}"><i class="app-menu__icon fa fa-dashboard"></i>
                 <span class="app-menu__label">Dashboard</span>
             </a>
         </li>
         @can('manage-users')
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i>
+                <a class="app-menu__item {{ Route::currentRouteName() == 'panel.users.index' ? 'active' : '' || Route::currentRouteName() == 'panel.roles.index' ? 'active' : '' }}" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i>
                     <span class="app-menu__label">User Management</span>
                     <i class="treeview-indicator fa fa-angle-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a class="treeview-item" href="{{ route('panel.users.index') }}"><i class="icon fa fa-circle-o"></i>Users</a>
+                        <a class="treeview-item {{ Route::currentRouteName() == 'panel.users.index' ? 'active' : '' }}" href="{{ route('panel.users.index') }}"><i class="icon fa fa-circle-o"></i>Users</a>
                     </li>
                     <li>
-                        <a class="treeview-item" href="{{ route('panel.roles.index') }}" target="_blank" rel="noopener noreferrer"><i class="icon fa fa-circle-o"></i>Roles</a>
+                        <a class="treeview-item {{ Route::currentRouteName() == 'panel.roles.index' ? 'active' : '' }}" href="{{ route('panel.roles.index') }}" target="_blank" rel="noopener noreferrer"><i class="icon fa fa-circle-o"></i>Roles</a>
                     </li>
                     <li>
                         <a class="treeview-item" href="#"><i class="icon fa fa-circle-o"></i>Permissions</a>
@@ -32,7 +32,8 @@
             </li>
         @endcan
         <li>
-            <a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-cogs"></i>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}" href="{{ route('settings') }}">
+                <i class="app-menu__icon fa fa-cogs"></i>
                 <span class="app-menu__label">Settings</span>
             </a>
         </li>

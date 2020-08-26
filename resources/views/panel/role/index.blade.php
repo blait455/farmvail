@@ -1,6 +1,11 @@
 @extends('layouts.panel')
 
 @section('content')
+    <div class="app-title">
+        <div>
+            <h1><i class="fa fa-dashboard"></i> Roles</h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-3">
             <div class="tile p-0">

@@ -25,4 +25,6 @@ Route::namespace('Panel')->prefix('home')->group(function() {
         Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']]);
         Route::resource('/roles', 'RolesController', ['except' => ['show', 'create']]);
     });
+    Route::get('/settings', 'SettingController@index')->name('settings');
+    Route::post('/settings', 'SettingController@update')->name('settings.update');
 });
