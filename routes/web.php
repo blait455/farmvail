@@ -55,6 +55,18 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/{id}/delete', 'BannerController@delete')->name('banners.delete');
 
         });
+        Route::group(['prefix' => 'products'], function () {
+
+            Route::get('/', 'ProductController@index')->name('products.index');
+            Route::get('/create', 'ProductController@create')->name('products.create');
+            Route::post('/store', 'ProductController@store')->name('products.store');
+            Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
+            Route::post('/update/{id}', 'ProductController@update')->name('products.update');
+            Route::get('/{id}/delete', 'ProductController@delete')->name('products.delete');
+
+            Route::post('images/upload', 'ProductImageController@upload')->name('products.images.upload');
+            Route::get('images/{id}/delete', 'ProductImageController@delete')->name('products.images.delete');
+         });
     });
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::post('/settings', 'SettingController@update')->name('settings.update');
