@@ -45,6 +45,16 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/{id}/delete', 'PartnerController@delete')->name('partners.delete');
 
         });
+        Route::group(['prefix'  =>   'banners'], function() {
+
+            Route::get('/', 'BannerController@index')->name('banners.index');
+            Route::get('/create', 'BannerController@create')->name('banners.create');
+            Route::post('/store', 'BannerController@store')->name('banners.store');
+            Route::get('/{id}/edit', 'BannerController@edit')->name('banners.edit');
+            Route::post('/update/{id}', 'BannerController@update')->name('banners.update');
+            Route::get('/{id}/delete', 'BannerController@delete')->name('banners.delete');
+
+        });
     });
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::post('/settings', 'SettingController@update')->name('settings.update');

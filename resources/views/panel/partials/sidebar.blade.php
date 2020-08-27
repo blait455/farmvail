@@ -13,6 +13,12 @@
             </a>
         </li>
         <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.banners.index' ? 'active' : '' }}" href="{{ route('panel.banners.index') }}">
+                <i class="app-menu__icon fa fa-briefcase"></i>
+                <span class="app-menu__label">Banners</span>
+            </a>
+        </li>
+        <li>
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.partners.index' ? 'active' : '' }}" href="{{ route('panel.partners.index') }}">
                 <i class="app-menu__icon fa fa-briefcase"></i>
                 <span class="app-menu__label">Partners</span>
