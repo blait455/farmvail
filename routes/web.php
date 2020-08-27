@@ -35,6 +35,16 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/{id}/delete', 'CategoryController@delete')->name('categories.delete');
 
         });
+        Route::group(['prefix'  =>   'partners'], function() {
+
+            Route::get('/', 'PartnerController@index')->name('partners.index');
+            Route::get('/create', 'PartnerController@create')->name('partners.create');
+            Route::post('/store', 'PartnerController@store')->name('partners.store');
+            Route::get('/{id}/edit', 'PartnerController@edit')->name('partners.edit');
+            Route::post('/update/{id}', 'PartnerController@update')->name('partners.update');
+            Route::get('/{id}/delete', 'PartnerController@delete')->name('partners.delete');
+
+        });
     });
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::post('/settings', 'SettingController@update')->name('settings.update');
