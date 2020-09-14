@@ -57,6 +57,13 @@
             </li>
         @endcan
         <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.contact.index' ? 'active' : '' }}"
+                href="{{ route('panel.contact.index') }}">
+                <i class="app-menu__icon fa fa-tags"></i>
+                <span class="app-menu__label">Contacts</span>
+            </a>
+        </li>
+        <li>
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.testimonies.index' ? 'active' : '' }}"
                 href="{{ route('panel.testimonies.index') }}">
                 <i class="app-menu__icon fa fa-tags"></i>

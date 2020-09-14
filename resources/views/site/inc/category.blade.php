@@ -8,7 +8,7 @@
                             <div class="text text-center">
                                 <h2>{{ config('settings.name') }}</h2>
                                 <p>Protecting the health of every home</p>
-                                <p><a href="#" class="btn btn-primary">Shop now</a></p>
+                                <p><a href="{{ route('shop') }}" class="btn btn-primary">Shop now</a></p>
                             </div>
                         </div>
                     </div>

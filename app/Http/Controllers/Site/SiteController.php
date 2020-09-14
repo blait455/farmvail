@@ -24,15 +24,29 @@ class SiteController extends Controller
         // dd($testimonies);
         return view('site.index', compact('banners', 'categories', 'category', 'categories_desc', 'categories_asc', 'partners', 'products', 'testimonies'));
     }
-    // public function menu() {
-    //     $categories = Category::all();
 
-    //     return view('site.partials.nav', compact('categories'));
-    // }
+    public function shop() {
+        $categories = Category::all();
 
-    // public function banner() {
-    //     $banners = Banner::all();
+        return view('site.shop', compact('categories'));
+    }
 
-    //     return view('site.inc.banner', compact('banners'));
-    // }
+    public function about() {
+        $categories = Category::all();
+        $testimonies = Testimony::where('status', 1)->get();
+
+        return view('site.about', compact('categories', 'testimonies'));
+    }
+
+    public function blog() {
+        $categories = Category::all();
+
+        return view('site.blog', compact('categories'));
+    }
+
+    public function contact() {
+        $categories = Category::all();
+
+        return view('site.contact', compact('categories'));
+    }
 }

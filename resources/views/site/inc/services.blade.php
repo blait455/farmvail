@@ -8,7 +8,7 @@
       </div>
       <div class="media-body">
         <h3 class="heading">Free Shipping</h3>
-        <span>On order over $100</span>
+        <span>On order over &#8358;{{ config('settings.shipping_fee') }}</span>
       </div>
     </div>
   </div>

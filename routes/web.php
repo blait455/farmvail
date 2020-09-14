@@ -18,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', 'Site\SiteController@index')->name('index');
+Route::get('/shop', 'Site\SiteController@shop')->name('shop');
+Route::get('/about', 'Site\SiteController@about')->name('about');
+Route::get('/blog', 'Site\SiteController@blog')->name('blog');
+Route::get('/contact', 'Site\SiteController@contact')->name('contact');
+Route::get('/panel/contact', 'Site\ContactController@index')->name('panel.contact.index');
+Route::post('/contact', 'Site\ContactController@store')->name('contact.store');
 
 Auth::routes();
 
