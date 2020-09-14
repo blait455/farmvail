@@ -56,4 +56,12 @@ class User extends Authenticatable
 
         return false;
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function testimonies()
+    {
+        return $this->hasMany(Testimony::class);
+    }
 }

@@ -18,7 +18,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="general">
                     <div class="tile">
-                        <form action="{{ route('panel.products.store') }}" method="POST" role="form">
+                        <form action="{{ route('panel.products.store') }}" method="POST" role="form" enctype="multipart/form-data">
                             @csrf
                             <h3 class="tile-title">Product Information</h3>
                             <hr>
@@ -100,14 +100,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label" for="special_price">Discount Price</label>
+                                            <label class="control-label" for="discount_price">Discount Price</label>
                                             <input
                                                 class="form-control"
                                                 type="text"
-                                                placeholder="Enter product special price"
-                                                id="special_price"
-                                                name="special_price"
-                                                value="{{ old('special_price') }}"
+                                                placeholder="Enter product discount price"
+                                                id="discount_price"
+                                                name="discount_price"
+                                                value="{{ old('discount_price') }}"
                                             />
                                         </div>
                                     </div>

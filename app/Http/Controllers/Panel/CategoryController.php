@@ -21,6 +21,11 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        // $categories = Category::orderByRaw('-name ASC')
+        //     ->get()
+        //     ->nest()
+        //     ->listsFlattened('name');
+
         return view('panel.categories.index', compact('categories'));
     }
 

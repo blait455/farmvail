@@ -10,18 +10,29 @@ class SettingsSeeder extends Seeder
      */
     protected $settings = [
         [
-            'key'                       =>  'site_name',
-            'value'                     =>  'Farmvail Application',
-        ],
-        [
-            'key'                       =>  'site_title',
+            'key'                       =>  'name',
             'value'                     =>  'Farmvail',
         ],
         [
-            'key'                       =>  'default_email_address',
-            'value'                     =>  'admin@admin.com',
+            'key'                       =>  'description',
+            'value'                     =>  'Farmvail Application',
         ],
         [
+            'key'                       =>  'address',
+            'value'                     =>  '203 Fake St. Mountain View, Dreamland, Enugu, Nigeria',
+        ],
+        [
+            'key'                       =>  'email',
+            'value'                     =>  'info@farmvail.com',
+        ],
+        [
+            'key'                       =>  'phone',
+            'value'                     =>  '+2 392 3929 210',
+        ],
+        [
+            'key'                       =>  'shipping_fee',
+            'value'                     =>  '100',
+        ],        [
             'key'                       =>  'site_logo',
             'value'                     =>  '',
         ],

@@ -28,7 +28,8 @@ class ProductController extends Controller
 
     public function store(Request $request) {
         $this->validate($request, [
-            'name'      =>  'required|max:255',
+            'name'      =>  'required|unique:products|max:100',
+            'image'     =>  'image',
             'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
             'special_price'     =>  'regex:/^\d+(\.\d{1,2})?$/',
             'quantity'  =>  'required|numeric',
@@ -45,7 +46,7 @@ class ProductController extends Controller
         $product->quantity = $request->quantity;
         $product->weight = $request->weight;
         $product->price = $request->price;
-        $product->discount_price = $request->special_price;
+        $product->discount_price = $request->discount_price;
         $product->status = $status;
         $product->featured = $featured;
         if ($request->hasFile('image')) {
@@ -53,7 +54,7 @@ class ProductController extends Controller
         }
         $product->save();
 
-        return redirect()->back();
+        return redirect()->route('panel.products.index');
     }
 
     public function edit($id) {
@@ -65,7 +66,8 @@ class ProductController extends Controller
 
     public function update(Request $request, $id) {
         $this->validate($request, [
-            'name'      =>  'required|max:255',
+            'name'      =>  'required|max:100',
+            'image'     =>  'image',
             'price'     =>  'required|regex:/^\d+(\.\d{1,2})?$/',
             'special_price'     =>  'regex:/^\d+(\.\d{1,2})?$/',
             'quantity'  =>  'required|numeric',
@@ -91,7 +93,7 @@ class ProductController extends Controller
         }
         $product->update();
 
-        return redirect()->back();
+        return redirect()->route('panel.products.index');
     }
 
     public function delete($id) {

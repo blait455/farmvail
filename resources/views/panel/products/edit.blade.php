@@ -16,7 +16,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="general">
                     <div class="tile">
-                        <form action="{{ route('panel.products.update', $product->id) }}" method="POST" role="form">
+                        <form action="{{ route('panel.products.update', $product->id) }}" method="POST" role="form" enctype="multipart/form-data">
                             @csrf
                             <h3 class="tile-title">Product Information</h3>
                             <hr>

@@ -19,6 +19,13 @@
             </a>
         </li>
         <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.categories.index' ? 'active' : '' }}"
+                href="{{ route('panel.categories.index') }}">
+                <i class="app-menu__icon fa fa-tags"></i>
+                <span class="app-menu__label">Categories</span>
+            </a>
+        </li>
+        <li>
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.products.index' ? 'active' : '' }}" href="{{ route('panel.products.index') }}">
                 <i class="app-menu__icon fa fa-briefcase"></i>
                 <span class="app-menu__label">Products</span>
@@ -28,13 +35,6 @@
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.partners.index' ? 'active' : '' }}" href="{{ route('panel.partners.index') }}">
                 <i class="app-menu__icon fa fa-briefcase"></i>
                 <span class="app-menu__label">Partners</span>
-            </a>
-        </li>
-        <li>
-            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.categories.index' ? 'active' : '' }}"
-                href="{{ route('panel.categories.index') }}">
-                <i class="app-menu__icon fa fa-tags"></i>
-                <span class="app-menu__label">Categories</span>
             </a>
         </li>
         @can('manage-users')
@@ -56,6 +56,13 @@
                 </ul>
             </li>
         @endcan
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.testimonies.index' ? 'active' : '' }}"
+                href="{{ route('panel.testimonies.index') }}">
+                <i class="app-menu__icon fa fa-tags"></i>
+                <span class="app-menu__label">Testimonies</span>
+            </a>
+        </li>
         <li>
             <a class="app-menu__item {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}" href="{{ route('settings') }}">
                 <i class="app-menu__icon fa fa-cogs"></i>

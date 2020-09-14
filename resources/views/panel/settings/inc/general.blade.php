@@ -27,14 +27,25 @@
                 />
             </div>
             <div class="form-group">
-                <label class="control-label" for="default_email_address">Default Email Address</label>
+                <label class="control-label" for="site_phone">Site Phone Number</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    placeholder="Enter store default phone number"
+                    id="site_phone"
+                    name="site_phone"
+                    value="{{ config('settings.site_phone') }}"
+                />
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="site_email">Site Email Address</label>
                 <input
                     class="form-control"
                     type="email"
                     placeholder="Enter store default email address"
-                    id="default_email_address"
-                    name="default_email_address"
-                    value="{{ config('settings.default_email_address') }}"
+                    id="site_email"
+                    name="site_email"
+                    value="{{ config('settings.site_email') }}"
                 />
             </div>
             <div class="form-group">

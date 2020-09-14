@@ -87,7 +87,7 @@ class PartnerController extends Controller
         }
         $partner->update();
 
-        return redirect()->back();
+        return redirect()->route('panel.partners.index');
     }
 
     /**
