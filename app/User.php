@@ -64,4 +64,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Testimony::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

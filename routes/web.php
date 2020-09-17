@@ -17,13 +17,23 @@ use Illuminate\Support\Facades\Route;
 //     return view('site.index');
 // });
 
-Route::get('/', 'Site\SiteController@index')->name('index');
-Route::get('/shop', 'Site\SiteController@shop')->name('shop');
-Route::get('/about', 'Site\SiteController@about')->name('about');
-Route::get('/blog', 'Site\SiteController@blog')->name('blog');
-Route::get('/contact', 'Site\SiteController@contact')->name('contact');
-Route::get('/panel/contact', 'Site\ContactController@index')->name('panel.contact.index');
-Route::post('/contact', 'Site\ContactController@store')->name('contact.store');
+    Route::get('/', 'Site\SiteController@index')->name('index');
+    Route::get('/shop', 'Site\SiteController@shop')->name('shop');
+    Route::get('/about', 'Site\SiteController@about')->name('about');
+    Route::get('/blog', 'Site\SiteController@blog')->name('blog');
+    Route::get('/contact', 'Site\SiteController@contact')->name('contact');
+    Route::get('/panel/contact', 'Site\ContactController@index')->name('panel.contact.index')->middleware('auth');
+    Route::post('/contact', 'Site\ContactController@store')->name('contact.store');
+
+    // Route::name('post.')->group(['prefix' => '/blog'], function () {
+    Route::get('/post/single/{slug}', 'Site\BlogController@single')->name('post.single');
+    Route::get('/post/category/{id}', 'Site\BlogController@categoryPost')->name('post.category');
+    Route::get('/post/tag/{slug}', 'Site\BlogController@tagPost')->name('post.tag');
+    Route::get('/post/user/{id}', 'Site\BlogController@userPost')->name('post.user');
+
+    Route::get('/post/search', 'Site\BlogController@search')->name('post.search');
+    // });
+
 
 Auth::routes();
 
@@ -64,9 +74,6 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/edit/{id}', 'ProductController@edit')->name('products.edit');
             Route::post('/update/{id}', 'ProductController@update')->name('products.update');
             Route::get('/{id}/delete', 'ProductController@delete')->name('products.delete');
-
-            Route::post('images/upload', 'ProductImageController@upload')->name('products.images.upload');
-            Route::get('images/{id}/delete', 'ProductImageController@delete')->name('products.images.delete');
         });
         Route::group(['prefix' =>   'testimonies'], function() {
             Route::get('/', 'TestimonyController@index')->name('testimonies.index');
@@ -74,6 +81,34 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::post('/update/{id}', 'TestimonyController@update')->name('testimonies.update');
             Route::get('/delete/{id}', 'TestimonyController@delete')->name('testimonies.delete');
         });
+        Route::group(['prefix' =>   'blog'], function() {
+            Route::get('/', 'BlogController@index')->name('blog');
+            Route::group(['prefix'  =>   'post-categories'], function() {
+                // Route::get('/', 'PostCategoryController@index')->name('post-categories.index');
+                Route::get('/create', 'PostCategoryController@create')->name('post-categories.create');
+                Route::post('/store', 'PostCategoryController@store')->name('post-categories.store');
+                Route::get('/{id}/edit', 'PostCategoryController@edit')->name('post-categories.edit');
+                Route::post('/update/{id}', 'PostCategoryController@update')->name('post-categories.update');
+                Route::get('/{id}/delete', 'PostCategoryController@delete')->name('post-categories.delete');
+            });
+            Route::group(['prefix'  =>   'tags'], function() {
+                // Route::get('/', 'TagController@index')->name('post-categories.index');
+                Route::get('/create', 'TagController@create')->name('tag.create');
+                Route::post('/store', 'TagController@store')->name('tag.store');
+                Route::get('/{id}/edit', 'TagController@edit')->name('tag.edit');
+                Route::post('/update/{id}', 'TagController@update')->name('tag.update');
+                Route::get('/{id}/delete', 'TagController@delete')->name('tag.delete');
+            });
+            Route::group(['prefix'  =>   'post'], function() {
+                // Route::get('/', 'PostController@index')->name('post-categories.index');
+                Route::get('/create', 'PostController@create')->name('post.create');
+                Route::post('/store', 'PostController@store')->name('post.store');
+                Route::get('/{id}/edit', 'PostController@edit')->name('post.edit');
+                Route::post('/update/{id}', 'PostController@update')->name('post.update');
+                Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
+            });
+        });
+
     });
     Route::get('/settings', 'SettingController@index')->name('settings');
     Route::post('/settings', 'SettingController@update')->name('settings.update');

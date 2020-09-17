@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Tag;
+use App\Post;
 use App\Banner;
 use App\Partner;
 use App\Category;
+use App\PostCategory;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Testimony;
@@ -39,9 +42,13 @@ class SiteController extends Controller
     }
 
     public function blog() {
+        $tags = Tag::all();
+        $posts = Post::where('status', 'publish')->get();
         $categories = Category::all();
+        $post_categories = PostCategory::all();
+        $recents = Post::where('status', 'publish')->orderBy('id', 'desc')->limit(3)->get();
 
-        return view('site.blog', compact('categories'));
+        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts'));
     }
 
     public function contact() {

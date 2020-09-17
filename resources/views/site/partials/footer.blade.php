@@ -1,4 +1,4 @@
-<footer class="ftco-footer ftco-section">
+<footer class="ftco-footer ftco-section {{ Route::currentRouteName() == 'blog' || 'post.single' ? 'bg-light' : '' }}">
     <div class="container">
         <div class="row">
             <div class="mouse">

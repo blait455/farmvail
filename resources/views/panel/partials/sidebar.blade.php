@@ -71,7 +71,15 @@
             </a>
         </li>
         <li>
-            <a class="app-menu__item {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}" href="{{ route('settings') }}">
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.blog' ? 'active' : '' }}"
+                href="{{ route('panel.blog') }}">
+                <i class="app-menu__icon fa fa-cogs"></i>
+                <span class="app-menu__label">Blog</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'settings' ? 'active' : '' }}"
+                href="{{ route('settings') }}">
                 <i class="app-menu__icon fa fa-cogs"></i>
                 <span class="app-menu__label">Settings</span>
             </a>
