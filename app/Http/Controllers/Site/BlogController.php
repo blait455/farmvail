@@ -6,9 +6,11 @@ use App\User;
 use App\Tag;
 use App\Post;
 use App\Category;
+use App\Wishlist;
 use App\PostCategory;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -16,12 +18,13 @@ class BlogController extends Controller
         // $setting = Settings::first();
         $categories = Category::all();
         $tags = Tag::all();
+        $wishlist = Wishlist::where('user_id', Auth::id())->get();
         $recents = Post::where('status', 'publish')->orderBy('id', 'desc')->limit(3)->get();
         $post_categories = PostCategory::all();
         $post = Post::where('status', 'publish')->where('slug', $request->slug)->first();
         // $wishlist = Wishlist::where('user_id', Auth::id())->get();
 
-        return view('site.blog.single', compact('post', 'post_categories', 'tags', 'recents', 'categories'));
+        return view('site.blog.single', compact('post', 'post_categories', 'tags', 'recents', 'categories', 'wishlist'));
     }
 
     public function CategoryPost($id) {

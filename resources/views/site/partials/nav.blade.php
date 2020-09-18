@@ -13,7 +13,9 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown04">
                     @foreach ($categories as $category)
-                        <a class="dropdown-item" href="#">{{ $category->name }}</a>
+                        @if ($category->id != 1)
+                            <a class="dropdown-item" href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a>
+                        @endif
                     @endforeach
                 </div>
             </li>
@@ -21,6 +23,7 @@
             <li class="nav-item"><a href="{{ route('blog') }}" class="nav-link">Blog</a></li>
             <li class="nav-item"><a href="{{ route('contact') }}" class="nav-link">Contact</a></li>
             <li class="nav-item cta cta-colored"><a href="cart.html" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+            <li class="nav-item"><a href="{{ route('wishlist') }}" class="nav-link"><span class="ion-ios-heart"></span><sup>{{ count($wishlist) }}</sup></a></li>
             @if (Route::has('login'))
                 @auth
                     <li class="nav-item"><a href="{{ url('/home') }}" class="nav-link">Dashboard</a></li>

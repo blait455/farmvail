@@ -1,4 +1,4 @@
-@extends('layouts.site', ['categories' => $categories])
+@extends('layouts.site', ['categories' => $categories, 'wishlist' => $wishlist])
 @section('title') {{ $product->name }} @endsection
 @section('content')
     <div class="hero-wrap hero-bread" style="background-image: url({{ asset('frontend/images/bg_1.jpg') }});">
@@ -104,7 +104,7 @@
                                         <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i class="ion-ios-cart"></i></span>
                                         </a>
-                                        <a href="#" class="heart d-flex justify-content-center align-items-center ">
+                                        <a href="{{ route('wishlist.add', $product->id) }}" class="heart d-flex justify-content-center align-items-center ">
                                             <span><i class="ion-ios-heart"></i></span>
                                         </a>
                                     </div>

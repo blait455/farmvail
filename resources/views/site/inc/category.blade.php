@@ -16,7 +16,7 @@
                         @foreach ($categories_asc as $category)
                             <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('storage/media/product/category/'.$category->image) }});">
                                 <div class="text px-3 py-1">
-                                    <h2 class="mb-0"><a href="#">{{ $category->name }}</a></h2>
+                                    <h2 class="mb-0"><a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a></h2>
                                 </div>
                             </div>
                         @endforeach
@@ -28,7 +28,7 @@
                 @foreach ($categories_desc as $category)
                     <div class="category-wrap ftco-animate img mb-4 d-flex align-items-end" style="background-image: url({{ asset('storage/media/product/category/'.$category->image) }});">
                         <div class="text px-3 py-1">
-                            <h2 class="mb-0"><a href="#">{{ $category->name }}</a></h2>
+                            <h2 class="mb-0"><a href="{{ route('shop.category', $category->id) }}">{{ $category->name }}</a></h2>
                         </div>
                     </div>
                 @endforeach

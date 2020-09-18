@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/about', 'Site\SiteController@about')->name('about');
     Route::get('/blog', 'Site\SiteController@blog')->name('blog');
     Route::get('/contact', 'Site\SiteController@contact')->name('contact');
+    Route::get('/wishlist', 'Site\SiteController@wishlist')->name('wishlist');
     Route::get('/panel/contact', 'Site\ContactController@index')->name('panel.contact.index')->middleware('auth');
     Route::post('/contact', 'Site\ContactController@store')->name('contact.store');
 
@@ -37,6 +40,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('/single/{slug}', 'Site\ShopController@show')->name('shop.single');
     Route::get('/category/{id}', 'Site\ShopController@categoryProduct')->name('shop.category');
 
+    Route::get('/wishlist/add/{id}', 'Site\WishlistController@add')->name('wishlist.add');
+    Route::get('/wishlist/remove/{id}', 'Site\WishlistController@remove')->name('wishlist.remove');
 
 Auth::routes();
 

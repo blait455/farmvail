@@ -1,4 +1,4 @@
-@extends('layouts.site', ['categories' => $categories])
+@extends('layouts.site', ['categories' => $categories, 'wishlist' => $wishlist])
 @section('title') {{ $post->title }} @endsection
 @section('content')
 <div class="hero-wrap hero-bread" style="background-image: url({{ asset('frontend/images/bg_1.jpg') }});">

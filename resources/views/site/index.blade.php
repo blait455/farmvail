@@ -1,4 +1,4 @@
-@extends('layouts.site', ['categories' => $categories])
+@extends('layouts.site', ['categories' => $categories, 'wishlist' => $wishlist])
 @section('title') Home @endsection
 @section('content')
     @include('site.inc.banner', ['banners' => $banners])
