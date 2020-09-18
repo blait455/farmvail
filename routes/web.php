@@ -34,6 +34,9 @@ use Illuminate\Support\Facades\Route;
     Route::get('/post/search', 'Site\BlogController@search')->name('post.search');
     // });
 
+    Route::get('/single/{slug}', 'Site\ShopController@show')->name('shop.single');
+    Route::get('/category/{id}', 'Site\ShopController@categoryProduct')->name('shop.category');
+
 
 Auth::routes();
 

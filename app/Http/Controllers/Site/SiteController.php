@@ -30,8 +30,9 @@ class SiteController extends Controller
 
     public function shop() {
         $categories = Category::all();
+        $products = Product::where('status', '1')->paginate(10);
 
-        return view('site.shop', compact('categories'));
+        return view('site.shop.index', compact('categories', 'products'));
     }
 
     public function about() {
