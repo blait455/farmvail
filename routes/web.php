@@ -43,6 +43,23 @@ use Illuminate\Support\Facades\Auth;
     Route::get('/wishlist/add/{id}', 'Site\WishlistController@add')->name('wishlist.add');
     Route::get('/wishlist/remove/{id}', 'Site\WishlistController@remove')->name('wishlist.remove');
 
+    // Route::post('/product/add/cart/{id}', 'Site\ProductController@addToCart')->name('product.add.cart');
+
+    // Route::get('/cart', 'Site\CartController@getCart')->name('cart');
+    Route::get('/cart/clear', 'Site\CartController@clearCart')->name('cart.clear');
+
+    Route::group(['prefix' => '/cart', 'middleware' => ['auth']], function () {      //'middleware' => ['auth','verified']]
+		Route::get('/', 'Site\CartController@index')->name('cart');
+		Route::get('/product/{slug}', 'Site\CartController@add')->name('cart.add');
+        Route::post('/product/single/{slug}', 'Site\CartController@addSingle')->name('cart.add.single');
+        Route::get('/cart/item/{id}/remove', 'Site\CartController@removeItem')->name('cart.remove');
+		// Route::get('/product', 'Site\CartController@index'); // handling only
+		// Route::get('/product/delete/{id}', 'Site\CartController@addToDelete')->name('cart.delete');
+		Route::post('/product/update/{id}', 'Site\CartController@addToUpdate')->name('cart.update');
+		Route::get('/checkout', 'Site\CartController@checkout')->name('cart.checkout')->middleware('cart_empty');
+		// Route::post('/order', 'OrderController@store')->name('cart.order');
+	});
+
 Auth::routes();
 
 Route::namespace('Panel')->prefix('home')->group(function() {

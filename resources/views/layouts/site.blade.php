@@ -30,7 +30,7 @@
     </head>
     <body class="goto-here">
         @include('site.partials.top')
-        @include('site.partials.nav', ['categories' => $categories, 'wishlist' => $wishlist])
+        @include('site.partials.nav', ['categories' => $categories, 'wishlist' => $wishlist, 'cart' => $cart])
 
         @yield('content')
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Cart;
 use App\Category;
 use App\Wishlist;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,7 @@ class WishlistController extends Controller
 
     public function index() {
         $user = Auth::id();
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         // $items = Cart::content();
         $categories = Category::all();
         $wishlist = Wishlist::where('user_id', Auth::id())->get();
@@ -24,7 +26,7 @@ class WishlistController extends Controller
         // $den = $user_list->products;
         // dd($den);
 
-        return view('site.wishlist', compact('items', 'categories', 'wishlist', 'setting'));
+        return view('site.wishlist', compact('items', 'categories', 'wishlist', 'setting', 'cart'));
     }
 
     public function add($id) {

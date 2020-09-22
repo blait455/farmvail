@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Site;
 
+use App\Cart;
 use App\User;
 use App\Tag;
 use App\Post;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 class BlogController extends Controller
 {
     public function single(Request $request) {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         // $setting = Settings::first();
         $categories = Category::all();
         $tags = Tag::all();
@@ -24,20 +26,22 @@ class BlogController extends Controller
         $post = Post::where('status', 'publish')->where('slug', $request->slug)->first();
         // $wishlist = Wishlist::where('user_id', Auth::id())->get();
 
-        return view('site.blog.single', compact('post', 'post_categories', 'tags', 'recents', 'categories', 'wishlist'));
+        return view('site.blog.single', compact('post', 'post_categories', 'tags', 'recents', 'categories', 'wishlist', 'cart'));
     }
 
     public function CategoryPost($id) {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         $tags = Tag::all();
         $categories = Category::all();
         $post_categories = PostCategory::all();
         $posts = Post::where('status', 'publish')->where('category_id', $id)->paginate(10);
         $recents = Post::where('status', 'publish')->orderBy('id', 'desc')->limit(3)->get();
 
-        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts'));
+        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts', 'cart'));
     }
 
     public function TagPost(Request $request) {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         $tags = Tag::all();
         $categories = Category::all();
         $post_categories = PostCategory::all();
@@ -48,18 +52,19 @@ class BlogController extends Controller
         //     'posts' => Tag::where('slug', $request->slug)->first()->posts()->paginate(10)
         // );
 
-        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts'));
+        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts', 'cart'));
 
     }
 
     public function UserPost(Request $request) {
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         $posts = User::find($request->id)->posts()->paginate(10);
         $tags = Tag::all();
         $categories = Category::all();
         $post_categories = PostCategory::all();
         $recents = Post::where('status', 'publish')->orderBy('id', 'desc')->limit(3)->get();
 
-        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts'));
+        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts', 'cart'));
     }
 
     public function show(Request $request){
@@ -77,6 +82,7 @@ class BlogController extends Controller
     }
 
     public function search(Request $request){
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         $tags = Tag::all();
         $categories = Category::all();
         $post_categories = PostCategory::all();
@@ -89,6 +95,6 @@ class BlogController extends Controller
                     ->orderBy('id', 'desc')
                     ->paginate(9);
 
-        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts'));
+        return view('site.blog.index', compact('categories', 'post_categories', 'recents', 'tags', 'posts', 'cart'));
     }
 }

@@ -1,5 +1,11 @@
 @extends('layouts.site', ['categories' => $categories, 'wishlist' => $wishlist])
 @section('title') {{ $product->name }} @endsection
+<script language="JavaScript" type="text/javascript">
+    function getform( )
+    {
+      document.subform.submit() ;
+    }
+</script>
 @section('content')
     <div class="hero-wrap hero-bread" style="background-image: url({{ asset('frontend/images/bg_1.jpg') }});">
         <div class="container">
@@ -19,7 +25,7 @@
                     <a href="images/product-1.jpg" class="image-popup"><img src="{{ asset('storage/media/product/'. $product->image) }}" class="img-fluid" alt="{{ $product->name }}"></a>
                 </div>
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
-                    <h3>Bell Pepper</h3>
+                    <h3>{{ $product->name }}</h3>
                     <div class="rating d-flex">
                         <p class="text-left mr-4">
                             <a href="#" class="mr-2">5.0</a>
@@ -42,26 +48,34 @@
                         <p class="price"><span>&#8358;{{ $product->price }}</span></p>
                     @endif
                     <p>{{ $product->description }}</p>
-                    <div class="row mt-4">
-
+                    <form name="subform" action="{{ route('cart.add.single', $product->slug) }}" method="POST">
+                        @csrf
+                        <div class="row mt-4">
+                            <div class="w-100"></div>
+                            <div class="input-group col-md-6 d-flex mb-3">
+                                <span class="input-group-btn mr-2">
+                                    <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field=""><i class="ion-ios-remove"></i></button>
+                                </span>
+                                <input type="text" id="quantity" name="qty" class="form-control input-number" value="1" min="1" max="100">
+                                <span class="input-group-btn ml-2">
+                                    <button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""><i class="ion-ios-add"></i></button>
+                                </span>
+                            </div>
                         <div class="w-100"></div>
-                        <div class="input-group col-md-6 d-flex mb-3">
-                            <span class="input-group-btn mr-2">
-                                <button type="button" class="quantity-left-minus btn"  data-type="minus" data-field=""><i class="ion-ios-remove"></i></button>
-                            </span>
-                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
-                            <span class="input-group-btn ml-2">
-                                <button type="button" class="quantity-right-plus btn" data-type="plus" data-field=""><i class="ion-ios-add"></i></button>
-                            </span>
+                        <div class="col-md-12">
+                            <p style="color: #000;">{{ $product->weight }} kg available</p>
                         </div>
-                    <div class="w-100"></div>
-                    <div class="col-md-12">
-                        <p style="color: #000;">{{ $product->weight }} kg available</p>
-                    </div>
+                        {{-- <input type="hidden" name="productId" value="{{ $product->id }}"> --}}
+                        <input type="hidden" name="price" value="{{ $product->discount_price ? $product->discount_price : $product->price }}">
+                        {{-- <input type="hidden" name="image" value="{{ $product->image }}"> --}}
+                        {{-- <input type="hidden" name="description" value="{{ $product->description }}"> --}}
+                        {{-- <p><a  class="btn btn-black py-3 px-5">Add to Cart</a></p> --}}
+                        <p><a href="javascript:getform()" class="btn btn-black py-3 px-5">Add to Cart</a></p>
+                        {{-- <button type="submit" class="btn rounded-pill">Add to Cart</button> --}}
+                    </form>
                 </div>
-                <p><a href="cart.html" class="btn btn-black py-3 px-5">Add to Cart</a></p>
             </div>
-        </div>
+        </div><hr>
     </section>
 
     <section class="ftco-section">
@@ -101,7 +115,7 @@
                                         <a href="{{ route('shop.single', $product->slug) }}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
                                             <span><i class="ion-ios-menu"></i></span>
                                         </a>
-                                        <a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
+                                        <a href="{{ route('cart.add', $product->slug) }}" class="buy-now d-flex justify-content-center align-items-center mx-1">
                                             <span><i class="ion-ios-cart"></i></span>
                                         </a>
                                         <a href="{{ route('wishlist.add', $product->id) }}" class="heart d-flex justify-content-center align-items-center ">
