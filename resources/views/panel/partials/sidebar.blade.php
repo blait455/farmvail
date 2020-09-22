@@ -19,6 +19,12 @@
             </a>
         </li>
         <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.coupon.index' ? 'active' : '' }}" href="{{ route('panel.coupon.index') }}">
+                <i class="app-menu__icon fa fa-briefcase"></i>
+                <span class="app-menu__label">Coupons</span>
+            </a>
+        </li>
+        <li>
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.categories.index' ? 'active' : '' }}"
                 href="{{ route('panel.categories.index') }}">
                 <i class="app-menu__icon fa fa-tags"></i>

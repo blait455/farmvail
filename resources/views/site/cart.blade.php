@@ -1,5 +1,11 @@
 @extends('layouts.site', ['categories' => $categories, 'wishlist' => $wishlist])
 @section('title') Cart @endsection
+<script language="JavaScript" type="text/javascript">
+    function getform( )
+    {
+      document.subform1.submit() ;
+    }
+</script>
 @section('content')
     <div class="hero-wrap hero-bread" style="background-image: url({{ asset('frontend/images/bg_1.jpg') }});">
         <div class="container">
@@ -68,14 +74,15 @@
                         <div class="cart-total mb-3">
                             <h3>Coupon Code</h3>
                             <p>Enter your coupon code if you have one</p>
-                            <form action="#" class="info">
+                            <form name="subform1" action="{{ route('coupon') }}" class="info" method="POST">
+                                @csrf
                                 <div class="form-group">
                                     <label for="">Coupon code</label>
-                                    <input type="text" class="form-control text-left px-3" placeholder="">
+                                    <input type="text" name="code" class="form-control text-left px-3" placeholder="">
                                 </div>
                             </form>
                         </div>
-                        <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
+                        <p><a href="javascript:getform()" class="btn btn-primary py-3 px-4">Apply Coupon</a></p>
                     </div>
                     <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                         <div class="cart-total mb-3">
@@ -103,20 +110,27 @@
                             <h3>Cart Totals</h3>
                             <p class="d-flex">
                                 <span>Subtotal</span>
-                                <span>$20.60</span>
+                                <span>&#8358;{{ $sum_total }}</span>
                             </p>
                             <p class="d-flex">
                                 <span>Delivery</span>
-                                <span>$0.00</span>
+                                <span>&#8358;{{ config('settings.shipping_fee') }}</span>
                             </p>
                             <p class="d-flex">
-                                <span>Discount</span>
-                                <span>$3.00</span>
+                                @if (Session::has('discount'))
+                                    <span>Discount</span>
+                                    <span>&#8358;{{Session::get('discount')['value']}}</span>
+                                    <p class="d-flex"> <span>Coupon</span><span> {{ Session::get('discount')['code'] }} <a href="{{ route('coupon.remove') }}"class="ion-ios-close"></a></span></p>
+                                @endif
                             </p>
                             <hr>
                             <p class="d-flex total-price">
                                 <span>Total</span>
-                                <span>$17.60</span>
+                                @if (Session::has('discount'))
+                                    <span>&#8358;{{ $sum_total + config('settings.shipping_fee') - Session::get('discount')['value']}}</span>
+                                @else
+                                    <span>&#8358;{{ $sum_total + config('settings.shipping_fee')}}</span>
+                                @endif
                             </p>
                         </div>
                         <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

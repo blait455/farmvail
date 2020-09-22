@@ -56,7 +56,9 @@ use Illuminate\Support\Facades\Auth;
 		// Route::get('/product', 'Site\CartController@index'); // handling only
 		// Route::get('/product/delete/{id}', 'Site\CartController@addToDelete')->name('cart.delete');
 		Route::post('/product/update/{id}', 'Site\CartController@addToUpdate')->name('cart.update');
-		Route::get('/checkout', 'Site\CartController@checkout')->name('cart.checkout')->middleware('cart_empty');
+        Route::get('/checkout', 'Site\CartController@checkout')->name('cart.checkout');
+        Route::post('/coupon', 'Site\CartController@couponApply')->name('coupon');
+        Route::get('/coupon/remove', 'Site\CartController@couponRemove')->name('coupon.remove');
 		// Route::post('/order', 'OrderController@store')->name('cart.order');
 	});
 
@@ -105,6 +107,14 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/edit/{id}', 'TestimonyController@edit')->name('testimonies.edit');
             Route::post('/update/{id}', 'TestimonyController@update')->name('testimonies.update');
             Route::get('/delete/{id}', 'TestimonyController@delete')->name('testimonies.delete');
+        });
+        Route::group(['prefix' =>   'coupon'], function() {
+            Route::get('/', 'CouponController@index')->name('coupon.index');
+            Route::get('/create', 'CouponController@create')->name('coupon.create');
+            Route::post('/store', 'CouponController@store')->name('coupon.store');
+            Route::get('/edit/{id}', 'CouponController@edit')->name('coupon.edit');
+            Route::post('/update/{id}', 'CouponController@update')->name('coupon.update');
+            Route::get('/delete/{id}', 'CouponController@delete')->name('coupon.delete');
         });
         Route::group(['prefix' =>   'blog'], function() {
             Route::get('/', 'BlogController@index')->name('blog');

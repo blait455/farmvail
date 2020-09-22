@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Site;
 
+use Session;
 use App\Cart;
 use App\Product;
+use App\Coupon;
 use App\Category;
 use App\Wishlist;
 use App\Http\Controllers\Controller;
@@ -12,33 +14,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    public function getCart()
-    {
-        $cart = Cart::getContent();
-        // dd($cart);
-        $categories = Category::all();
-        $wishlist = Wishlist::where('user_id', Auth::id())->get();
-
-        return view('site.cart', compact('categories', 'wishlist', 'cart'));
-    }
-
-    // public function removeItem($id)
-    // {
-    //     Cart::remove($id);
-
-    //     if (Cart::isEmpty()) {
-    //         return redirect('/');
-    //     }
-    //     return redirect()->back()->with('message', 'Item removed from cart successfully.');
-    // }
-
-    public function clearCart()
-    {
-        Cart::clear();
-
-        return redirect('/');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -48,9 +23,11 @@ class CartController extends Controller
         $categories = Category::all();
         $wishlist = Wishlist::where('user_id', Auth::id())->get();
         $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
+        $sum_total = $cart->sum('total');
+
         // dd(count($cart));
 
-        return view('site.cart', compact('categories', 'wishlist', 'cart'));
+        return view('site.cart', compact('categories', 'wishlist', 'cart', 'sum_total'));
     }
 
     /**
@@ -233,5 +210,31 @@ class CartController extends Controller
         }
 
         return view('shop.checkout')->with($data);
+    }
+
+    public function couponApply(Request $request){
+        $code = $request->code;
+        $coupon = Coupon::where('code', $code)->first();
+        if($coupon){
+            $total_price = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->sum('total');
+            Session::put('discount', [
+                'id' => $coupon->id,
+                'code' => $coupon->code,
+                'value' => $coupon->discount($total_price)
+            ]);
+            return redirect()->back();
+        }
+        return 0;
+    }
+
+    public function couponRemove() {
+        Session::forget('discount');
+
+        $notification = [
+            'message'       =>  'Coupon removed',
+            'alert-type'    =>  'success'
+        ];
+
+        return redirect()->back()->with($notification);
     }
 }

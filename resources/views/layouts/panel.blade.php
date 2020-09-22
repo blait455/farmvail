@@ -8,7 +8,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('panel/css/main.css') }}" />
         <link rel="stylesheet" type="text/css" href="{{ asset('panel/css/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('panel/summernote/summernote-bs4.css') }}">
-        @trixassets
     </head>
     <body class="app sidebar-mini rtl">
         @include('panel.partials.header')
