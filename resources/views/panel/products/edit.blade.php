@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('panel/js/plugins/dropzone/dist/min/dropzone.min.css') }}"/>
 @endsection
 @section('title', 'Edit product')
-=@section('content')
+@section('content')
     <div class="app-title">
         <div>
             <h1><i class="fa fa-shopping-bag"></i> Edit product</h1>

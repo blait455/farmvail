@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Panel\OrderController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,6 +116,17 @@ Route::namespace('Panel')->prefix('home')->group(function() {
             Route::get('/edit/{id}', 'CouponController@edit')->name('coupon.edit');
             Route::post('/update/{id}', 'CouponController@update')->name('coupon.update');
             Route::get('/delete/{id}', 'CouponController@delete')->name('coupon.delete');
+        });
+        Route::group(['prefix' =>   'order'], function() {
+            Route::get('/', 'OrderController@index')->name('order.index');
+            Route::get('/edit/{id}', 'OrderController@edit')->name('order.edit');
+            Route::get('/payment/complete/{id}', 'OrderController@paid')->name('order.paid');
+            Route::get('/payment/decline/{id}', 'OrderController@unpay')->name('order.unpay');
+            Route::get('/complete/{id}', 'OrderController@completed')->name('order.completed');
+            Route::get('/process/{id}', 'OrderController@processing')->name('order.processing');
+            Route::get('/decline/{id}', 'OrderController@decline')->name('order.declined');
+            Route::get('/delete/{id}', 'OrderController@delete')->name('order.delete');
+            Route::post('/store', 'OrderController@store')->name('order.store');
         });
         Route::group(['prefix' =>   'blog'], function() {
             Route::get('/', 'BlogController@index')->name('blog');

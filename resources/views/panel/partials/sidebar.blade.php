@@ -2,8 +2,10 @@
 <aside class="app-sidebar">
     <div class="app-sidebar__user">
         <div>
-            <p class="app-sidebar__user-name">{{ Auth::user()->name }}</p>
-            <p class="app-sidebar__user-designation">{{ Auth::user()->email }}</p>
+            @if (Auth::check())
+                <p class="app-sidebar__user-name">{{ Auth::user()->name }}</p>
+                <p class="app-sidebar__user-designation">{{ Auth::user()->email }}</p>
+            @endif
         </div>
     </div>
     <ul class="app-menu">
@@ -22,6 +24,12 @@
             <a class="app-menu__item {{ Route::currentRouteName() == 'panel.coupon.index' ? 'active' : '' }}" href="{{ route('panel.coupon.index') }}">
                 <i class="app-menu__icon fa fa-briefcase"></i>
                 <span class="app-menu__label">Coupons</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'panel.order.index' ? 'active' : '' }}" href="{{ route('panel.order.index') }}">
+                <i class="app-menu__icon fa fa-briefcase"></i>
+                <span class="app-menu__label">Orders</span>
             </a>
         </li>
         <li>

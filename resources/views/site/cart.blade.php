@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                         <div class="cart-total mb-3">
-                            <h3>Cart Totals</h3>
+                            <h3>Cart Total</h3>
                             <p class="d-flex">
                                 <span>Subtotal</span>
                                 <span>&#8358;{{ $sum_total }}</span>
@@ -133,7 +133,7 @@
                                 @endif
                             </p>
                         </div>
-                        <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                        <p><a href="{{ route('cart.checkout') }}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
                     </div>
                 </div>
             @else

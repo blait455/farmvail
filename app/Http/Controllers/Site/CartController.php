@@ -160,7 +160,7 @@ class CartController extends Controller
                     }
                     // dd($price);
                     $cart->price = $price;
-                    $cart->total = $price * $qty;
+                    $cart->total = $price * $cart->quantity;
                     $cart->save();
                     $success = 'Cart updated!';
                 }else{
@@ -191,25 +191,30 @@ class CartController extends Controller
      *
      */
     public function checkout(){
-
+        $categories = Category::all();
+        $wishlist = Wishlist::where('user_id', Auth::id())->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
         $orders = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->get();
 
         if ($orders->isEmpty()) {
-
-           $data = array(
-                'orders'=>[],
-                'total_price'=> 0.00
-            );
+        //    $data = array(
+        //         'orders'=>[],
+        //         'total_price'=> 0.00
+        //     );
+            return redirect()->back();
 
         }else{
-            $total_price = Cart::where('user_id', auth()->user()->id)->where('order_id', null)->sum('price');
+            $sum_total = $cart->sum('total');
             $data = array(
-                'orders'=>$orders,
-                'total_price'=> $total_price
+                'orders'        => $orders,
+                'sum_total'     => $sum_total,
+                'categories'    => $categories,
+                'wishlist'      => $wishlist,
+                'cart'          => $cart
             );
         }
 
-        return view('shop.checkout')->with($data);
+        return view('site.shop.checkout')->with($data);
     }
 
     public function couponApply(Request $request){

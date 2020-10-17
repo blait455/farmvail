@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('coupon_id')->nullable();
-            // $table->unsignedBigInteger('payment_id')->nullable();
+            $table->unsignedBigInteger('payment_id')->nullable();
             $table->unsignedBigInteger('shipping_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('first_name');

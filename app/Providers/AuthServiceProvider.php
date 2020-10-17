@@ -25,7 +25,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        
+
         // Users management permissions
         Gate::define('manage-users', function($user) {
             return $user->hasAnyRoles(['admin', 'author']);
@@ -50,6 +50,19 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('delete-roles', function($user) {
+            return $user->hasRole('admin');
+        });
+
+        // Orders management permissions
+        Gate::define('manage-orders', function($user) {
+            return $user->hasAnyRoles(['admin', 'author']);
+        });
+
+        Gate::define('edit-orders', function($user) {
+            return $user->hasAnyRoles(['admin', 'author']);
+        });
+
+        Gate::define('delete-orders', function($user) {
             return $user->hasRole('admin');
         });
     }

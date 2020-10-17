@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('order_id');
-            $table->enum('payment_method', ['cash', 'bKash', 'rocket'])->default('cash');
+            $table->enum('payment_method', ['cash', 'transfer', 'paystack'])->default('cash');
             $table->string('transaction_id')->nullable();
             $table->enum('status', ['paid', 'unpaid'])->default('unpaid');
             $table->text('notes')->nullable();
